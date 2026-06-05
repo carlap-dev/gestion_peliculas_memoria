@@ -1,6 +1,7 @@
 package cl.usm.gestionPeliculasMemoria.controllers;
 
 import cl.usm.gestionPeliculasMemoria.entities.Pelicula;
+import cl.usm.gestionPeliculasMemoria.repositories.PeliculasRepository;
 import cl.usm.gestionPeliculasMemoria.services.PeliculasService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,8 +13,12 @@ import java.util.List;
 @RestController
 public class PeliculasController {
 
+    private final PeliculasService peliculasService;
+
     @Autowired
-    private PeliculasService peliculasService;
+    public PeliculasController(PeliculasService peliculasService) {
+        this.peliculasService = peliculasService;
+    }
 
     @GetMapping("/peliculas")
     public ResponseEntity<List<Pelicula>> getAll(@RequestParam(required = false) String q) {
